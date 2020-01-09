@@ -11,7 +11,6 @@ public class SingleLinkedList {
         if (head == null) {
             head = n;
             tail = null;
-            size++;
         }
         Node temp = head;
         while (temp.getNext() != null) {
@@ -19,20 +18,20 @@ public class SingleLinkedList {
         }
         temp.setNext(n);
         n.setNext(null);
-        size++;
         tail = n;
+
     }
 
     public void insertAtStart(int data) {
         Node n = new Node(data);
         if (head == null) {
             head = n;
-            size++;
+
         }
         Node temp = head;
         n.setNext(temp);
         head = n;
-        size++;
+
     }
 
     public int getSize() {
@@ -44,30 +43,35 @@ public class SingleLinkedList {
         while (temp != null) {
             System.out.println(temp.getData());
             temp = temp.getNext();
+            size++;
         }
     }
 
     public void insertAtPosition(int position, int data) {
-        if (position <= 0 && position > size + 1) {
+        if (position <= 0 || position > size + 1) {
             throw new IllegalArgumentException("Position is invalid");
         } else if (position == 1) {
             Node n = new Node(10);
             if (head == null) {
                 head = n;
-                size++;
+
             } else {
                 Node temp = head;
                 n.setNext(temp);
                 head = n;
-                size++;
             }
         } else {
             Node n = new Node(data);
             Node temp = head;
+            Node currentNode = null;
+            position--;
             while (position != 0) {
-             temp= temp.getNext();
-             position--;
+                currentNode = temp;
+                temp = temp.getNext();
+                position--;
             }
+            n.setNext(temp);
+            currentNode.setNext(n);
         }
     }
 
